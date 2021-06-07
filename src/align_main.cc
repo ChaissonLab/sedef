@@ -304,7 +304,9 @@ void generate_alignments(const string &ref_path, const string &bed_path,
       string fb = fr.get_sequence(h.ref->name, h.ref_start, &h.ref_end);
       if (h.ref->is_rc)
         fb = rc(fb);
-
+      if (fa.size () > 1000000 and fb.size() > 100000) {
+	continue;
+      }
       eprnn("\r Processing {} out of {} ({:.1f}%, len {:10n} to {:10n})", lines,
             total, pct(lines, total), fa.size(), fb.size());
 
