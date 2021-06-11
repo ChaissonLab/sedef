@@ -88,14 +88,10 @@ void bucket_alignments_extern(const string &bed_path, int nbins,
       }
       // Bucket reads to allow external sorting
       string fno =
-          output_dir + fmt::format("/tmp_{}_{}.tmp", lookup[h.query->name],
-                                   lookup[h.ref->name]);
+          output_dir + fmt::format("/tmp_{}.tmp", lookup[h.query->name]);
       auto it = tmp_bins.find(fno);
       if (it == tmp_bins.end()) {
         tmp_bins[fno] = fopen(fno.c_str(), "w");
-	if (tmp_bins[fno] == 0x0) {
-	  tmp_bins[fno] = fopen("test2", "w");
-	}
         it = tmp_bins.find(fno);
         assert(it != tmp_bins.end());
       }
