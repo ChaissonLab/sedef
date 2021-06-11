@@ -93,11 +93,15 @@ void bucket_alignments_extern(const string &bed_path, int nbins,
       auto it = tmp_bins.find(fno);
       if (it == tmp_bins.end()) {
         tmp_bins[fno] = fopen(fno.c_str(), "w");
+	if (tmp_bins[fno] == 0x0) {
+	  tmp_bins[fno] = fopen("test2", "w");
+	}
         it = tmp_bins.find(fno);
         assert(it != tmp_bins.end());
       }
       FILE *fo = it->second;
-      fputs(h.to_bed(false).c_str(), fo);
+      string hitStr= h.to_bed(false).c_str();
+      fputs(hitStr.c_str(), fo);
       fputs("\n", fo);
       lens[fno]++;
 

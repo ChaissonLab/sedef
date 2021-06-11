@@ -15,9 +15,10 @@
 
 /******************************************************************************/
 
-const size_t KB = 1000;
-const size_t MB = 1000 * KB;
-const size_t GB = 1000 * MB;
+
+#define KB 1000
+#define MB 1000000
+#define GB 1000000000
 
 /******************************************************************************/
 
@@ -35,7 +36,7 @@ struct Search {
   static int MIN_READ_SIZE;
 
   // search.cc
-  static const int MAX_SD_SIZE = 1 * 1024 * 1024; /// 1MB at most
+  static const int MAX_SD_SIZE; // = 1 * 1024 * 1024; /// 1MB at most
 };
 
 struct Hash {
@@ -51,7 +52,7 @@ struct Align { // Full SD alignment (via KSW)
   static int GAP_EXTEND;
 
   // align.cc
-  static const int MAX_KSW_SEQ_LEN = 60 * KB;
+  static const int MAX_KSW_SEQ_LEN; // = 60 * KB;
 };
 
 struct Extend { // Extension of initial SDs
@@ -68,8 +69,8 @@ struct Extend { // Extension of initial SDs
 struct Chain {
   // chain.cc
   // Minimum number of uppercase letters in the chain
-  static const int MIN_UPPERCASE_MATCH = 90;
-  static const int MATCH_CHAIN_SCORE = 4;
+  static const int MIN_UPPERCASE_MATCH;// = 90;
+  static const int MATCH_CHAIN_SCORE; // = 4;
 
   // Minimum chain gap (depends on user parameters)
   static int MAX_CHAIN_GAP;
@@ -81,9 +82,9 @@ struct Chain {
     static constexpr double MISMATCH = 1;
     static constexpr double GAP = 0.5;
     static constexpr double GAPOPEN = 100; // try to approximate WGAC
-    static const int MIN_READ = 900;       // Minimal refined read size
-    static const int SIDE_ALIGN = 500;
-    static const int MAX_GAP = 10 * KB; // Max gap during refining process
+    static const int MIN_READ; // = 900;       // Minimal refined read size
+    static const int SIDE_ALIGN; // = 500;
+    static const int MAX_GAP; // = 10 * KB; // Max gap during refining process
   };
 };
 
@@ -98,13 +99,13 @@ struct Stats {
   static double MAX_SCALED_ERROR;
 
   // Minimum number of consecutive Ns needed to call assembly gap
-  static const int MIN_ASSEMBLY_GAP_SIZE = 100;
-  static const int BIG_OVERLAP_THRESHOLD = 100;
+  static const int MIN_ASSEMBLY_GAP_SIZE; // = 100;
+  static const int BIG_OVERLAP_THRESHOLD; // = 100;
 };
 
 struct Internal {
-  static const bool DoUppercase = true;
-  static const bool DoUppercaseSeeds = true;
-  static const bool DoQgram = true;
+  static const bool DoUppercase; // = true;
+  static const bool DoUppercaseSeeds; // = true;
+  static const bool DoQgram; // = true;
 };
 }; // namespace Globals

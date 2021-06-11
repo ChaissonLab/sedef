@@ -37,3 +37,22 @@ int Stats::MAX_OK_GAP = -1;
 int Stats::MIN_SPLIT_SIZE = KB;
 int Stats::MIN_UPPERCASE = 100;
 double Stats::MAX_SCALED_ERROR = 0.5;
+
+const int Search::MAX_SD_SIZE = 1 * 1024 * 1024; /// 1MB at most
+const int Align::MAX_KSW_SEQ_LEN = 60 * KB;
+const int Chain::MIN_UPPERCASE_MATCH = 90;
+const int Chain::MATCH_CHAIN_SCORE = 4;
+const int Chain::Refine::MIN_READ = 900;       // Minimal refined read size
+const int Chain::Refine::SIDE_ALIGN = 500;
+const int Chain::Refine::MAX_GAP = 10 * KB; // Max gap during refining process
+
+const int Stats::MIN_ASSEMBLY_GAP_SIZE = 100;
+const int Stats::BIG_OVERLAP_THRESHOLD = 100;
+
+
+
+const bool Internal::DoUppercase = true;
+const bool Internal::DoUppercaseSeeds = true;
+const bool Internal::DoQgram = true;
+
+

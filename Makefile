@@ -15,7 +15,7 @@ SOURCES:=$(wildcard src/*.cc) $(wildcard extern/*.cc)
 OBJECTS:=$(SOURCES:.cc=.o)
 DEP := $(OBJECTS:.o=.d)
 
-CPPFLAGS += -MMD -MP -I. -O2
+CPPFLAGS += -I. 
 
 .PHONY: all clean
 
@@ -28,7 +28,7 @@ all: $(SOURCES) $(EXECUTABLE)
 release: CPPFLAGS+=-g -O3 -DNDEBUG 
 release: $(SOURCES) $(EXECUTABLE)
 
-debug: CPPFLAGS+=-g
+debug: CPPFLAGS=-g
 debug: $(SOURCES) $(EXECUTABLE)
 
 superdebug: CPPFLAGS+=-g -O0 -fno-inline
@@ -58,10 +58,10 @@ PYTHON_INCLUDE = /usr/include/python$(PYTHON_VERSION)
 
 $(LIB): $(OBJECTS)
 	$(CXX) -I$(PYTHON_INCLUDE) -I. -fPIC -c python/sedef.cpp -std=c++14 -o python/sedef.po
-	$(CXX) -shared -Wl,--export-dynamic python/sedef.po $(OBJECTS) -lboost_python -lrt -lz -L/usr/lib/python$(PYTHON_VERSION)/config -lpython$(PYTHON_VERSION) -fopenmp -o $@.so
+	$(CXX) -shared -Wl,--export-dynamic python/sedef.po $(OBJECTS) -lboost_python -lrt -L$(CONDA_PREFIX)/lib -lz -L/usr/lib/python$(PYTHON_VERSION)/config -lpython$(PYTHON_VERSION) -fopenmp -o $@.so
 
 $(EXECUTABLE): $(OBJECTS) 
-	$(CXX) $(OBJECTS) $(LDFLAGS) -o $(EXE)
+	$(CXX) -std=c++14 $(OBJECTS) -L$(CONDA_PREFIX)/lib $(LDFLAGS) -o $(EXE)
 
 .cc.o:	
 	$(CXX) $(CPPFLAGS) -DGITVER=\"$(GIT_VERSION)\" $< -o $@
